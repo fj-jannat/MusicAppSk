@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +12,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fatimajannat.musicapp.Model.Artist;
 import com.example.fatimajannat.musicapp.Model.Track;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,7 +38,6 @@ public class TrackActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        final  Intent intent = getIntent();
 
         //attaching value event listener
         databaseTracks.addValueEventListener(new ValueEventListener() {
@@ -52,22 +49,11 @@ public class TrackActivity extends AppCompatActivity {
                 //iterating through all the nodes
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
 
-                    DataSnapshot id =snapshot.getValue(DataSnapshot.class);
+                    //getting track
+                    Track track = snapshot.getValue(Track.class);
 
-
-
-                    if(id.equals(intent.getStringExtra(ArtistActivity.ARTIST_ID_KEY))) {
-                        //getting track
-                        for(DataSnapshot snapshotForTrack: id.getChildren()){
-                            Track track = snapshotForTrack.getValue(Track.class);
-
-                           //adding track to the list
-                            trackList.add(track);
-                        }
-
-                        break;
-
-                    }
+                    //adding track to the list
+                    trackList.add(track);
 
                 }
 

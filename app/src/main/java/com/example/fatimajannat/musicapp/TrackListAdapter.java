@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.fatimajannat.musicapp.Model.Artist;
 import com.example.fatimajannat.musicapp.Model.Track;
 
 import java.util.List;
@@ -40,7 +39,7 @@ public class TrackListAdapter  extends ArrayAdapter<Track> {
 
         Track track = trackList.get(position);
         textViewName.setText(track.getTrackName());
-        textViewRating.setText(track.getRating());
+        textViewRating.setText(String.valueOf(track.getRating()));
 
         return listViewItem;
 
